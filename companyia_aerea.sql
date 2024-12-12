@@ -53,4 +53,4 @@ create table passatger(
 drop table if exists vol;
 create table vol(
     codi varchar int
-)
+);
