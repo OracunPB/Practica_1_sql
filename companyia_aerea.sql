@@ -10,40 +10,13 @@
 
 drop table if exists companyia;
 create table companyia (
-    nom varchar (40) not null, -- primary key
-    IATA varchar (6) not null,
-    CODE3 varchar (6) not null,
-    ICA0 varchar (6) not null,
-    pais varchar (40) not null,
-    filial_de varchar (40) -- foreign key
+  nom varchar (40) not null primary key,
+  IATA varchar (6) not null,
+  CODE3 varchar (6) not null,
+  ICA0 varchar (6) not null,
+  pais varchar (40) not null,
+  filial_de varchar (40)
 
-);
-
-drop table if exists avio;
-create table avio (
-    num_serie varchar (30) not null, -- primary key
-    tipus varchar (10) not null, -- (comercial, passatgers, transport de mercaderies)
-    fabricant varchar (20) not null,
-    any_fabricacio tinyint,
-    companyia varchar (40) not null -- foreign key
-
-);
-
-drop table if exists aeroport;
-create table aeroport (
-    codi varchar (4) not null, -- primary key
-    pais varchar (40) not null,
-    ciutat varchar (40) not null,
-    IATA varchar (4),
-    nom varchar (55) not null,
-    any_construccio tinyint
-
-);
-
-drop table if exists mostrador;
-create table mostrador (
-    numero smallint -- primary key
-    codi_aeroport varchar (4) not null, -- foreign key
 );
 
 
@@ -80,5 +53,8 @@ create table passatger(
 
 drop table if exists vol;
 create table vol(
-    codi varchar int
+    codi varchar (9) not null,
+    data date not null,
+    durada time not null,
+    descripcio varchar (15)
 );
