@@ -9,7 +9,7 @@
 -- Creació de les taules
 drop table if exists companyia;
 create table companyia (
-  nom varchar (40) not null primary key,
+  nom varchar (40) not null,
   IATA varchar (6) not null,
   CODE3 varchar (6) not null,
   ICA0 varchar (6) not null,
@@ -52,5 +52,8 @@ create table passatger(
 
 drop table if exists vol;
 create table vol(
-    codi varchar int
+    codi varchar (9) not null,
+    data date not null,
+    durada time not null,
+    descripcio varchar (15)
 );
