@@ -1,5 +1,5 @@
 /* *****************************************************
-  INSTITUT TIC de Barcelona
+  INSTITUT TIC de Barcelonaa
     CFGS Desenvolupament d'aplicacions webs (DAW) 1A
     Mòdul: 0484 Bases de dades. 
     AUTORS: Ricardo Martín Díaz, Pau Bosch Pérez
