@@ -6,6 +6,15 @@
     DATA: 12/12/2024
 ****************************************************** */
 
+/* Creació de la base de dades
+
+(Preguntar a Jordi en clase si es necesario crear una base de datos previa a la creación de las tablas)
+
+drop database if exists companyia_aeria;
+create database companyia_aeria;
+use companyia_aeria;
+*/
+
 -- Creació de les taules
 
 drop table if exists companyia;
