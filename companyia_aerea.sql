@@ -56,6 +56,33 @@ create table mostrador (
 );
 
 
+drop table if exists avio;
+create table avio (
+    num_serie varchar (30) not null, -- primary key
+    tipus varchar (10) not null, -- (comercial, passatgers, transport de mercaderies)
+    fabricant varchar (20) not null,
+    any_fabricacio tinyint,
+    companyia varchar (40) not null -- foreign key
+
+);
+
+drop table if exists aeroport;
+create table aeroport (
+    codi varchar (4) not null, -- primary key
+    pais varchar (40) not null,
+    ciutat varchar (40) not null,
+    IATA varchar (4),
+    nom varchar (55) not null,
+    any_construccio tinyint
+
+);
+
+drop table if exists mostrador;
+create table mostrador (
+    numero smallint -- primary key
+    codi_aeroport varchar (4) not null, -- foreign key
+);
+
 
 
 drop table if exists personal;
