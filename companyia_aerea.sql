@@ -22,9 +22,9 @@ create table companyia (
     nom varchar (40) not null, -- primary key
     IATA varchar (6) not null,
     CODE3 varchar (6) not null,
-    ICA0 varchar (6) not null,
+    ICAO varchar (6) not null,
     pais varchar (40) not null,
-    filial_de varchar (40) -- foreign key
+    filial_de varchar (40) -- foreign key REF companyia(nom)
 
 );
 
@@ -33,8 +33,8 @@ create table avio (
     num_serie varchar (30) not null, -- primary key
     tipus varchar (10) not null, -- (comercial, passatgers, transport de mercaderies)
     fabricant varchar (20) not null,
-    any_fabricacio tinyint,
-    companyia varchar (40) not null -- foreign key
+    any_fabricacio year,
+    companyia varchar (40) not null -- foreign key REF companyia(nom)
 
 );
 
@@ -45,49 +45,21 @@ create table aeroport (
     ciutat varchar (40) not null,
     IATA varchar (4),
     nom varchar (55) not null,
-    any_construccio tinyint
+    any_construccio year
 
 );
 
 drop table if exists mostrador;
 create table mostrador (
-    numero smallint -- primary key
-    codi_aeroport varchar (4) not null, -- foreign key
-);
-
-
-drop table if exists avio;
-create table avio (
-    num_serie varchar (30) not null, -- primary key
-    tipus varchar (10) not null, -- (comercial, passatgers, transport de mercaderies)
-    fabricant varchar (20) not null,
-    any_fabricacio tinyint,
-    companyia varchar (40) not null -- foreign key
-
-);
-
-drop table if exists aeroport;
-create table aeroport (
-    codi varchar (4) not null, -- primary key
-    pais varchar (40) not null,
-    ciutat varchar (40) not null,
-    IATA varchar (4),
-    nom varchar (55) not null,
-    any_construccio tinyint
-
-);
-
-drop table if exists mostrador;
-create table mostrador (
-    numero smallint -- primary key
-    codi_aeroport varchar (4) not null, -- foreign key
+    numero smallint unsigned, -- primary key (debería ser not null al ser primary key, aunque no especifique el enunciado que deba ser obligatorio??)
+    codi_aeroport varchar (4) not null -- foreign key REF aeroport(codi)
 );
 
 
 
 drop table if exists personal;
 create table personal (
-    num_empleat int unsigned,
+    num_empleat int unsigned, -- al ser primary key, no debería ser not null ? (en el modelo relacional no lo pone)
     nom varchar (25) not null,
     cognom varchar (35) not null,
     passaport varchar (20) not null,
@@ -96,12 +68,13 @@ create table personal (
 
 drop table if exists hostessa;
 create table hostessa (
-    num_empleat int unsigned
+    num_empleat int unsigned -- al ser foreign key, no debería ser not null ? (en el modelo relacional no lo pone)
 );
 
 drop table if exists pilot;
 create table pilot (
     hores_vol smallint unsigned
+    -- num_empleat int unsigned -- al ser foreign key, no debería ser not null ? (en el modelo relacional no lo pone)
 )
 
 drop table if exists passatger;
