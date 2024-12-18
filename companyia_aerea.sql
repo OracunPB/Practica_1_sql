@@ -51,7 +51,7 @@ create table aeroport (
 
 drop table if exists mostrador;
 create table mostrador (
-    numero smallint unsigned, -- primary key (debería ser not null al ser primary key, aunque no especifique el enunciado que deba ser obligatorio??)
+    numero smallint unsigned, -- primary key (debería ser not null al ser primary key, aunque no especifique el enunciado que deba ser obligatorio?? Pau: las primary creo que nunca pueden ser null?¿? (no estoy seguro))
     codi_aeroport varchar (4) not null -- foreign key REF aeroport(codi)
 );
 
