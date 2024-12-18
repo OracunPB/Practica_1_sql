@@ -6,14 +6,6 @@
     DATA: 12/12/2024
 ****************************************************** */
 
-/* Creació de la base de dades
-
-(Preguntar a Jordi en clase si es necesario crear una base de datos previa a la creación de las tablas)
-
-drop database if exists companyia_aeria;
-create database companyia_aeria;
-use companyia_aeria;
-*/
 
 -- Creació de les taules
 
@@ -24,7 +16,7 @@ create table companyia (
     CODE3 varchar (6) not null,
     ICAO varchar (6) not null,
     pais varchar (40) not null,
-    filial_de varchar (40) -- foreign key REF companyia(nom)
+    filial_de varchar (40) -- foreign key REFERENCES companyia(nom)
 
 );
 
@@ -34,7 +26,7 @@ create table avio (
     tipus varchar (10) not null, -- (comercial, passatgers, transport de mercaderies)
     fabricant varchar (20) not null,
     any_fabricacio year,
-    companyia varchar (40) not null -- foreign key REF companyia(nom)
+    companyia varchar (40) not null -- foreign key REFERENCES companyia(nom)
 
 );
 
@@ -51,15 +43,15 @@ create table aeroport (
 
 drop table if exists mostrador;
 create table mostrador (
-    numero smallint unsigned, -- primary key (debería ser not null al ser primary key, aunque no especifique el enunciado que deba ser obligatorio?? Pau: las primary creo que nunca pueden ser null?¿? (no estoy seguro))
-    codi_aeroport varchar (4) not null -- foreign key REF aeroport(codi)
+    numero smallint unsigned, -- primary key
+    codi_aeroport varchar (4) not null -- foreign key REFERENCES aeroport(codi)
 );
 
 
 
 drop table if exists personal;
 create table personal (
-    num_empleat int unsigned, -- al ser primary key, no debería ser not null ? (en el modelo relacional no lo pone)
+    num_empleat int unsigned,
     nom varchar (25) not null,
     cognom varchar (35) not null,
     passaport varchar (20) not null,
@@ -68,13 +60,13 @@ create table personal (
 
 drop table if exists hostessa;
 create table hostessa (
-    num_empleat int unsigned -- al ser foreign key, no debería ser not null ? (en el modelo relacional no lo pone)
+    num_empleat int unsigned
 );
 
 drop table if exists pilot;
 create table pilot (
     hores_vol smallint unsigned
-    -- num_empleat int unsigned -- al ser foreign key, no debería ser not null ? (en el modelo relacional no lo pone)
+    -- num_empleat int unsigned (al ser una generalización se muestra la primary key de personal, igual que hostessa no?)
 )
 
 drop table if exists passatger;
