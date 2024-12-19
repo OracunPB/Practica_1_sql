@@ -13,8 +13,8 @@ drop table if exists companyia;
 create table companyia (
     nom varchar (40) not null, -- primary key
     IATA varchar (6) not null,
-    CODE3 varchar (6) not null,
-    ICAO varchar (6) not null,
+    CODE3 varchar (6),
+    ICAO varchar (6),
     pais varchar (40) not null,
     filial_de varchar (40) -- foreign key REFERENCES companyia(nom)
 
