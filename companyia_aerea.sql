@@ -67,7 +67,7 @@ drop table if exists pilot;
 create table pilot (
     hores_vol smallint unsigned,
     num_empleat int unsigned
-)
+);
 
 drop table if exists passatger;
 create table passatger (
