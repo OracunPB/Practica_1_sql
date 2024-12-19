@@ -65,8 +65,8 @@ create table hostessa (
 
 drop table if exists pilot;
 create table pilot (
-    hores_vol smallint unsigned
-    -- num_empleat int unsigned (al ser una generalización se muestra la primary key de personal, igual que hostessa no?)
+    hores_vol smallint unsigned,
+    num_empleat int unsigned
 )
 
 drop table if exists passatger;
