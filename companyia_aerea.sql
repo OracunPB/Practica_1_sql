@@ -17,7 +17,6 @@ create table companyia (
     ICAO varchar (6),
     pais varchar (40) not null,
     filial_de varchar (40) -- foreign key REFERENCES companyia(nom)
-
 );
 
 drop table if exists avio;
@@ -27,7 +26,6 @@ create table avio (
     fabricant varchar (20) not null,
     any_fabricacio year,
     companyia varchar (40) not null -- foreign key REFERENCES companyia(nom)
-
 );
 
 drop table if exists aeroport;
@@ -38,13 +36,12 @@ create table aeroport (
     IATA varchar (4),
     nom varchar (55) not null,
     any_construccio year
-
 );
 
 drop table if exists mostrador;
 create table mostrador (
-    numero smallint unsigned not null, --primary key
-    codi_aeroport varchar (4) not null --foreign key REFERENCES aeroport(codi)
+    numero smallint unsigned not null, -- primary key
+    codi_aeroport varchar (4) not null -- foreign key REFERENCES aeroport(codi)
 );
 
 
@@ -60,13 +57,13 @@ create table personal (
 
 drop table if exists hostessa;
 create table hostessa (
-    num_empleat int unsigned not null,
+    num_empleat int unsigned not null
 );
 
 drop table if exists pilot;
 create table pilot (
     hores_vol smallint unsigned,
-    num_empleat int unsigned not null,
+    num_empleat int unsigned not null
 );
 
 drop table if exists passatger;
