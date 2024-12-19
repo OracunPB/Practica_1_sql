@@ -43,7 +43,7 @@ create table aeroport (
 
 drop table if exists mostrador;
 create table mostrador (
-    numero smallint unsigned, -- primary key
+    numero smallint unsigned not null, --primary key
     codi_aeroport varchar (4) not null -- foreign key REFERENCES aeroport(codi)
 );
 
