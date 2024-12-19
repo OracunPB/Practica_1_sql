@@ -70,18 +70,19 @@ create table pilot (
 )
 
 drop table if exists passatger;
-create table passatger(
+create table passatger (
     passaport varchar (20) not null,
     nom varchar (30) not null,
     cognom varchar (50),
-    adreca,
+    adreca varchar (70),
+    telefon varchar (9),
     email varchar (40),
     data_naixement date,
     genere char (1)
 );
 
 drop table if exists vol;
-create table vol(
+create table vol (
     codi varchar (9) not null,
     data date not null,
     durada time not null,
