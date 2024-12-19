@@ -51,7 +51,7 @@ create table mostrador (
 
 drop table if exists personal;
 create table personal (
-    num_empleat int unsigned,
+    num_empleat int unsigned not null,
     nom varchar (25) not null,
     cognom varchar (35) not null,
     passaport varchar (20) not null,
@@ -60,13 +60,13 @@ create table personal (
 
 drop table if exists hostessa;
 create table hostessa (
-    num_empleat int unsigned
+    num_empleat int unsigned not null,
 );
 
 drop table if exists pilot;
 create table pilot (
     hores_vol smallint unsigned,
-    num_empleat int unsigned
+    num_empleat int unsigned not null,
 );
 
 drop table if exists passatger;
@@ -87,4 +87,11 @@ create table vol (
     data date not null,
     durada time not null,
     descripcio varchar (15)
+);
+
+drop table if exists volar;
+create table volar (
+    passatger varchar (20) not null,
+    vol varchar (9) not null,
+    seient int
 );
