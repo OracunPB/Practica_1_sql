@@ -74,6 +74,7 @@ create table passatger(
     passaport varchar (20) not null,
     nom varchar (30) not null,
     cognom varchar (50),
+    adreca,
     email varchar (40),
     data_naixement date,
     genere char (1)
