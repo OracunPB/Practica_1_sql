@@ -91,7 +91,7 @@ CREATE TABLE Mostrador (
 ) CHARACTER SET utf8mb4;
 
 alter table Mostrador
-add constraint pk_Mostrador primary key (numero, codi_aeroport)
+add constraint pk_Mostrador primary key (numero, codi_aeroport);
 
 -- ------------------------------------------------------
 --  Creació de la taula  personal
@@ -106,7 +106,7 @@ CREATE TABLE personal (
 )  CHARACTER SET utf8mb4;
 
 alter table personal
-add constraint pk_personal primary key (num_empleat)
+add constraint pk_personal primary key (num_empleat);
 
 -- ------------------------------------------------------
 --  Creació de la taula  vol
@@ -125,7 +125,7 @@ CREATE TABLE vol (
 ) CHARACTER SET utf8mb4;
 
 alter table vol
-add constraint pk_vol primary key (codi)
+add constraint pk_vol primary key (codi);
 
 -- ------------------------------------------------------
 --  Creació de la taula  passatger
@@ -143,7 +143,7 @@ CREATE TABLE passatger (
 )  CHARACTER SET utf8mb4;
 
 alter table passatger
-add constraint pk_passatger primary key (passaport)
+add constraint pk_passatger primary key (passaport);
 
 -- ------------------------------------------------------
 --  Creació de la taula  pilot
@@ -155,7 +155,7 @@ CREATE TABLE pilot (
 )CHARACTER SET utf8mb4;
 
 alter table pilot
-add constraint pk_pilot primary key (num_empleat)
+add constraint pk_pilot primary key (num_empleat);
 
 
 -- ------------------------------------------------------
@@ -167,5 +167,5 @@ CREATE TABLE volar(
 	seient tinyint
 )CHARACTER SET utf8mb4;
 
-alter table personal
-add constraint pk_personal primary key (num_empleat)
+alter table volar
+add constraint pk_volar primary key (passatger, vol);
