@@ -50,6 +50,13 @@ CREATE TABLE hostessa (
 alter table hostessa
 add constraint pk_hostessa primary key (num_empleat);
 
+alter table hostessa
+add constraint fk_hostessa_personal foreign key (num_empleat)
+references personal (num_empleat)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+
 -- ------------------------------------------------------
 --  Creació de la taula  avio
 -- ------------------------------------------------------
@@ -65,10 +72,15 @@ CREATE TABLE avio (
 alter table avio
 add constraint pk_avio primary key (num_serie);
 
+alter table avio
+add constraint fk_avio_companyia foreign key (companyia)
+references companyia (nom)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
 -- ------------------------------------------------------
 --  Creació de la taula  aeroport
 -- ------------------------------------------------------
-
 CREATE TABLE aeroport (
 	codi CHAR(4), 
 	pais Varchar(40) not null, 
@@ -81,6 +93,9 @@ CREATE TABLE aeroport (
 alter table aeroport
 add constraint pk_aeroport primary key (codi);
 
+alter table aeroport
+add constraint uq_iata unique (IATA);
+
 -- ------------------------------------------------------
 --  Creació de la taula  Mostrador
 -- ------------------------------------------------------
@@ -92,6 +107,12 @@ CREATE TABLE Mostrador (
 
 alter table Mostrador
 add constraint pk_Mostrador primary key (numero, codi_aeroport);
+
+alter table Mostrador
+add constraint fk_Mostrador_aeroport foreign key (codi_aeroport)
+references aeroport (codi)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
 
 -- ------------------------------------------------------
 --  Creació de la taula  personal
@@ -107,6 +128,12 @@ CREATE TABLE personal (
 
 alter table personal
 add constraint pk_personal primary key (num_empleat);
+
+alter table personal
+add constraint uq_passaport unique (passaport);
+
+alter table personal
+add constraint ch_sou check (sou >= 20000);
 
 -- ------------------------------------------------------
 --  Creació de la taula  vol
@@ -157,6 +184,12 @@ CREATE TABLE pilot (
 alter table pilot
 add constraint pk_pilot primary key (num_empleat);
 
+alter table pilot
+add constraint fk_pilot_personal foreign key (num_empleat)
+references personal (num_empleat)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
 
 -- ------------------------------------------------------
 --  Creació de la taula  volar
@@ -169,3 +202,6 @@ CREATE TABLE volar(
 
 alter table volar
 add constraint pk_volar primary key (passatger, vol);
+
+alter table volar
+add constraint ch_seient check (seient >= 1, seient <= 200);
