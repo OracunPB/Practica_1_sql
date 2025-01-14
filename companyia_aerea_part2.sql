@@ -178,7 +178,7 @@ add constraint pk_passatger primary key (passaport);
 
 CREATE TABLE pilot (
 	num_empleat int, 
-	hores_Vol smallint
+	hores_vol smallint
 )CHARACTER SET utf8mb4;
 
 alter table pilot
@@ -205,3 +205,41 @@ add constraint pk_volar primary key (passatger, vol);
 
 alter table volar
 add constraint ch_seient check (seient >= 1, seient <= 200);
+
+
+El seient és un número entre 1 i 200.
+alter table volar
+add constraint ck_seient check (seient > 0 and seient <= 200);
+
+- El número de passaport del personal no es pot repetir.
+alter table personal
+add constraint uni_passaport unique (passaport); /// passaport unique
+
+- El tipus d’avió pot valer només COM-PAS, JET, o CARGO.
+alter table vol
+add constraint ck_tipus_avio check (avio='COM-PAS' or avio='JET' or avio='CARGO');
+
+- La descripció del vol pot valer només ON-TIME, DELAYED, o UNKNOWN
+alter table vol
+add constraint ck_vol_desc check (descripcio='ON-TIME' or descripcio='DELAYED' or descripcio='UNKNOWN');
+
+- Per ser pilot s’han de tenir com a mínim 400 hores de vol.
+alter table pilot
+add constraint ck_hores_vol check (hores_vol >= 400);
+
+- En un vol un seient no pot estar ocupat per més d’una persona.
+alter table volar
+add constraint uni_seient unique (seient);
+
+- La durada dels vols ha de ser un valor entre 10 i 1200 (és a dir, entre 10 minuts i 20
+hores)
+alter table vol
+add constraint ck_durada check (durada <= 1200 and durada >= 10);
+
+- El sou no pot ser negatiu. A més el sou mínim ha de ser de 20.000 dolars.
+alter table personal
+add constraint ck_sou check (sou >= 20000);
+
+- El codi IATA dels aeroports no es pot repetir
+alter table aeroport
+add constraint uni_iata unique (IATA);
