@@ -279,7 +279,7 @@ add constraint ck_seient check (seient > 0 and seient <= 200);
 
 - El número de passaport del personal no es pot repetir.
 alter table personal
-add constraint uni_passaport unique (passaport); /// passaport unique
+add constraint uni_passaport unique (passaport);
 
 - El tipus d’avió pot valer només COM-PAS, JET, o CARGO.
 alter table vol
@@ -507,4 +507,4 @@ alter table volar
 add constraint ch_seient check (seient >= 1, seient <= 200);
 
 alter table volar
-add constraint uq_seient unique (seient);
+add constraint uq_vol_seient unique (seient, vol);
