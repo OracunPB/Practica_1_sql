@@ -78,6 +78,9 @@ references companyia (nom)
 ON DELETE RESTRICT
 ON UPDATE CASCADE;
 
+alter table avio
+add constraint ch_avio_tipus check (tipus IN ('COM-PAS', 'JET', 'CARGO'));
+
 -- ------------------------------------------------------
 --  Creació de la taula  aeroport
 -- ------------------------------------------------------
@@ -154,6 +157,42 @@ CREATE TABLE vol (
 alter table vol
 add constraint pk_vol primary key (codi);
 
+alter table vol
+add constraint fk_vol_aeroport_origen foreign key (aeroport_origen)
+references aeroport (codi)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table vol
+add constraint fk_vol_aeroport_desti foreign key (aeroport_desti)
+references aeroport (codi)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table vol
+add constraint fk_vol_avio foreign key (avio)
+references avio (num_serie)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table vol
+add constraint fk_vol_hostessa foreign key (hostessa)
+references hostessa (num_empleat)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table vol
+add constraint fk_vol_pilot foreign key (pilot)
+references pilot (num_empleat)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table vol
+add constraint ch_vol_descripcio check (descripcio IN ('ON-TIME', 'DELAYED', 'UNKNOWN'));
+
+alter table vol
+add constraint ch_vol_durada check (durada >= 10, durada <= 1200);
+
 -- ------------------------------------------------------
 --  Creació de la taula  passatger
 -- ------------------------------------------------------
@@ -190,6 +229,9 @@ references personal (num_empleat)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
+alter table pilot
+add constraint ch_pilot_hores_vol check (hores_vol >= 400);
+
 
 -- ------------------------------------------------------
 --  Creació de la taula  volar
@@ -204,7 +246,31 @@ alter table volar
 add constraint pk_volar primary key (passatger, vol);
 
 alter table volar
+add constraint fk_volar_passatger foreign key (passatger)
+references passatger (passaport)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table volar
+add constraint fk_volar_vol foreign key (vol)
+references vol (codi)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table volar
 add constraint ch_seient check (seient >= 1, seient <= 200);
+
+alter table volar
+add constraint uq_seient unique (seient);
+
+
+
+
+
+
+
+
+
 
 
 El seient és un número entre 1 i 200.
@@ -243,3 +309,202 @@ add constraint ck_sou check (sou >= 20000);
 - El codi IATA dels aeroports no es pot repetir
 alter table aeroport
 add constraint uni_iata unique (IATA);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* *****************************************************
+  INSTITUT TIC de Barcelona
+    CFGS: Desenvolupament d'aplicacions webs (DAW) 1A
+    Mòdul: 0484 Bases de dades. 
+    AUTORS: Ricardo Martín Díaz, Pau Bosch Pérez
+    DATA: 14/01/2025
+****************************************************** */
+
+-- ------------------------------------------------------
+-- Base de dades de vols
+-- ------------------------------------------------------
+
+
+-- ------------------------------------------------------
+--  Modificació de taula companyia
+-- ------------------------------------------------------
+
+alter table companyia
+add constraint pk_companyia primary key (nom);
+
+-- ------------------------------------------------------
+--  Modificació de la taula  hostessa
+-- ------------------------------------------------------
+
+alter table hostessa
+add constraint pk_hostessa primary key (num_empleat);
+
+alter table hostessa
+add constraint fk_hostessa_personal foreign key (num_empleat)
+references personal (num_empleat)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+-- ------------------------------------------------------
+--  Modificació de la taula  avio
+-- ------------------------------------------------------
+
+alter table avio
+add constraint pk_avio primary key (num_serie);
+
+alter table avio
+add constraint fk_avio_companyia foreign key (companyia)
+references companyia (nom)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table avio
+add constraint ch_avio_tipus check (tipus IN ('COM-PAS', 'JET', 'CARGO'));
+
+-- ------------------------------------------------------
+--  Modificació de la taula  aeroport
+-- ------------------------------------------------------
+
+alter table aeroport
+add constraint pk_aeroport primary key (codi);
+
+alter table aeroport
+add constraint uq_iata unique (IATA);
+
+-- ------------------------------------------------------
+--  Modificació de la taula  Mostrador
+-- ------------------------------------------------------
+
+alter table Mostrador
+add constraint pk_Mostrador primary key (numero, codi_aeroport);
+
+alter table Mostrador
+add constraint fk_Mostrador_aeroport foreign key (codi_aeroport)
+references aeroport (codi)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+-- ------------------------------------------------------
+--  Modificació de la taula  personal
+-- ------------------------------------------------------
+
+alter table personal
+add constraint pk_personal primary key (num_empleat);
+
+alter table personal
+add constraint uq_passaport unique (passaport);
+
+alter table personal
+add constraint ch_sou check (sou >= 20000);
+
+-- ------------------------------------------------------
+--  Modificació de la taula  vol
+-- ------------------------------------------------------
+
+alter table vol
+add constraint pk_vol primary key (codi);
+
+alter table vol
+add constraint fk_vol_aeroport_origen foreign key (aeroport_origen)
+references aeroport (codi)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table vol
+add constraint fk_vol_aeroport_desti foreign key (aeroport_desti)
+references aeroport (codi)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table vol
+add constraint fk_vol_avio foreign key (avio)
+references avio (num_serie)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table vol
+add constraint fk_vol_hostessa foreign key (hostessa)
+references hostessa (num_empleat)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table vol
+add constraint fk_vol_pilot foreign key (pilot)
+references pilot (num_empleat)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table vol
+add constraint ch_vol_descripcio check (descripcio IN ('ON-TIME', 'DELAYED', 'UNKNOWN'));
+
+alter table vol
+add constraint ch_vol_durada check (durada >= 10, durada <= 1200);
+
+-- ------------------------------------------------------
+--  Modificació de la taula  passatger
+-- ------------------------------------------------------
+
+alter table passatger
+add constraint pk_passatger primary key (passaport);
+
+-- ------------------------------------------------------
+--  Modificació de la taula  pilot
+-- ------------------------------------------------------
+
+alter table pilot
+add constraint pk_pilot primary key (num_empleat);
+
+alter table pilot
+add constraint fk_pilot_personal foreign key (num_empleat)
+references personal (num_empleat)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+alter table pilot
+add constraint ch_pilot_hores_vol check (hores_vol >= 400);
+
+-- ------------------------------------------------------
+--  Modificació de la taula  volar
+-- ------------------------------------------------------  
+
+alter table volar
+add constraint pk_volar primary key (passatger, vol);
+
+alter table volar
+add constraint fk_volar_passatger foreign key (passatger)
+references passatger (passaport)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table volar
+add constraint fk_volar_vol foreign key (vol)
+references vol (codi)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
+alter table volar
+add constraint ch_seient check (seient >= 1, seient <= 200);
+
+alter table volar
+add constraint uq_seient unique (seient);
