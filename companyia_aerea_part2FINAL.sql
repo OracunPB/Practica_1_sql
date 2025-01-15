@@ -54,6 +54,12 @@ references personal (num_empleat)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
+alter table companyia
+add constraint fk_companyia_filial foreign key (filial_de)
+references companyia (nom)
+ON DELETE RESTRICT
+ON UPDATE CASCADE;
+
 alter table avio
 add constraint fk_avio_companyia foreign key (companyia)
 references companyia (nom)
